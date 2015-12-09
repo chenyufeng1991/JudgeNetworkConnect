@@ -1,0 +1,2 @@
+# JudgeNetworkConnect
+使用苹果提供的Reachability来判断网络的连接情况。其中的第二种方法可以实时监听网络状态。
