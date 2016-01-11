@@ -16,28 +16,29 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
+
   [super viewDidLoad];
-
+  //在需要的地方执行该判断；
   [self testConnection];
-
 }
 
 -(void)testConnection{
+
   NSString *result;
   if ([self checkNetworkConnection]) {
-    result = @"连接网络成功！";
+      result = @"连接网络成功！";
   }else {
-    result = @"连接网络失败！";
+      result = @"连接网络失败！";
   }
+  //这里大家可以使用AlertController来弹出提示框；
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:result
                                                  delegate:self
                                         cancelButtonTitle:@"确定" otherButtonTitles:nil];
   [alert show];
-  
 }
 
--(BOOL)checkNetworkConnection
-{
+-(BOOL)checkNetworkConnection{
+
   struct sockaddr_in zeroAddress;
   bzero(&zeroAddress, sizeof(zeroAddress));
   zeroAddress.sin_len = sizeof(zeroAddress);
@@ -50,15 +51,13 @@
   CFRelease(defaultRouteReachability);
   
   if (!didRetrieveFlags) {
+
     printf("Error. Count not recover network reachability flags\n");
     return NO;
   }
-  
   BOOL isReachable = flags & kSCNetworkFlagsReachable;
   BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;
   return (isReachable && !needsConnection) ? YES : NO;
 }
 
 @end
-
-
